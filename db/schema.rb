@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_212207) do
+ActiveRecord::Schema.define(version: 2021_04_27_214545) do
 
   create_table "authors", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,4 +24,16 @@ ActiveRecord::Schema.define(version: 2021_04_27_212207) do
     t.index ["reset_password_token"], name: "index_authors_on_reset_password_token", unique: true
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.boolean "published"
+    t.datetime "published_at"
+    t.integer "author_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
+  end
+
+  add_foreign_key "posts", "authors"
 end
